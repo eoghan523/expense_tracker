@@ -37,6 +37,20 @@ def update_expense(expense_id, description, amount, date):
     }
     response = requests.put(f"{BASE_URL}/{expense_id}", json=updated_expense)
     if response.status_code == 200:
-        print("Expense udpdated:", response.status_code)
+        print("Expense udpdated:", response.json())
+    
+    else:
+        print("Error in updating expense:", response.status_code)
+
+def delete_expense(expense_id):
+    """"Delete an expense function."""
+    response =  requests.delete(f"{BASE_URL}/{expense_id}")
+    if response.status_code == 204:
+        print("Expense deleted successfully.")
+    
+    else: 
+        print("Error in deleting expense: ", response.status_code)
+
+
 
 
