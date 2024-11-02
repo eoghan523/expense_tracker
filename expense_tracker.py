@@ -28,7 +28,15 @@ def add_expense(description, amount, date):    #Add Expense function which defin
     else:
         print("Error adding your response.", response.status_code)
 
-def 
-
+def update_expense(expense_id, description, amount, date):
+    """Update to an existing expense."""
+    updated_expense = {
+        "description": description,
+        "amount": amount,
+        "date": date
+    }
+    response = requests.put(f"{BASE_URL}/{expense_id}", json=updated_expense)
+    if response.status_code == 200:
+        print("Expense udpdated:", response.status_code)
 
 
