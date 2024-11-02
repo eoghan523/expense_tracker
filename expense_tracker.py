@@ -9,7 +9,7 @@ def view_expenses():
     if response.status_code == 200:
         expenses = response.json().get('expenses', [])
         for expense in expenses:
-            print(f"ID: {expense['id']}, Description: {expense['description']}, Amount: {expense['amount']}, Date: {expense['date']}")
+            print(f"ID: {expense['id']}, description: {expense['description']}, amount: {expense['amount']}, date: {expense['date']}")
     
     else:
         print("Error retrieving expenses: ", response.status_code)
@@ -17,9 +17,9 @@ def view_expenses():
 
 def add_expense(description, amount, date):    #Add Expense function which defines the add expense dictionary key-pairs.
     new_expense = {
-        "Description": description,
-        "Amount":     amount,
-        "Date":       date
+        "description": description,
+        "amount":     amount,
+        "date":       date
     }
     response = requests.post(BASE_URL, json=new_expense)
     if response.status_code == 201:
@@ -72,23 +72,43 @@ def main():
         
         elif user_choice == '2':
             description = input("Enter your expense description: ")
-            amount      = float(input("Enter an amount: £"))
-            date        = input("Enter expense date (DD-MM-YYYY): ")
+            while True:
+                try: 
+                    amount = float(input("Enter an amount: £"))
+                    break
+                except ValueError:
+                    print("Invalid input. Please enter a numeric amount.")
+           
+            date  = input("Enter expense date (DD-MM-YYYY): ")
             add_expense(description, amount, date)
 
         elif user_choice == '3':
-            expense_id = int(input("Enter expense ID to update: "))
+            while True:
+                try:
+                    expense_id = int(input("Enter expense ID to update: "))
+                    break  # Valid input, exit the loop
+                except ValueError:
+                    print("Invalid input. Please enter a numeric expense ID.")
+
             description = input("Enter new expense description: ")
             amount = float(input("Enter new expense amount: "))
             date = input("Enter new expense date (YYYY-MM-DD): ")
             update_expense(expense_id, description, amount, date)
+
         elif user_choice == '4':
-            expense_id = int(input("Enter expense ID to delete: "))
+            while True:
+                try:
+                    expense_id = int(input("Enter expense ID to delete: "))
+                    break  # Valid input, exit the loop
+                except ValueError:
+                    print("Invalid input. Please enter a numeric expense ID.")
             delete_expense(expense_id)
+
+
         elif user_choice == '5':
             break
         else:
-            print("Invalid option. Please enter a valid response...")
+            return ValueError("Invalid option. Please enter a valid response...")
 
 if __name__ == '__main__':
     main()
