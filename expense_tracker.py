@@ -1,6 +1,6 @@
 import requests  #imports rquests module neeeded for handling http requests.
 
-BASE_URL = "http://127.0.0.1:5000/expenses"
+BASE_URL = "http://127.0.0.1:5000/expenses"           #This is the API/ URL pointed towards the flask server running in app.py and listening on port 5000. 
 
 
 
