@@ -52,5 +52,50 @@ def delete_expense(expense_id):
         print("Error in deleting expense: ", response.status_code)
 
 
+def main():
+    """Main expense tracker function."""
+    while True:
+
+        print("============================")
+        print("|    Expense Tracker app    |")
+        print("============================")
+        print("1. View Expenses")
+        print("2. Add an Expense")
+        print("3. Update an Expense")
+        print("4. Delete an Expense")
+        print("5. Exit")
+
+        user_choice = input("Please select an option (1-5): ")
+
+        if user_choice == '1':
+            view_expenses()
+        
+        elif user_choice == '2':
+            description = input("Enter your expense description: ")
+            amount      = float(input("Enter an amount: £"))
+            date        = input("Enter expense date (DD-MM-YYYY): ")
+            add_expense(description, amount, date)
+
+        elif user_choice == '3':
+            expense_id = int(input("Enter expense ID to update: "))
+            description = input("Enter new expense description: ")
+            amount = float(input("Enter new expense amount: "))
+            date = input("Enter new expense date (YYYY-MM-DD): ")
+            update_expense(expense_id, description, amount, date)
+        elif user_choice == '4':
+            expense_id = int(input("Enter expense ID to delete: "))
+            delete_expense(expense_id)
+        elif user_choice == '5':
+            break
+        else:
+            print("Invalid option. Please enter a valid response...")
+
+if __name__ == '__main__':
+    main()
+
+
+     
+
+
 
 
