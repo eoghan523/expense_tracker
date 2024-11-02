@@ -4,6 +4,15 @@ BASE_URL = "http://127.0.0.1:5000/expenses"
 
 
 
+def view_expenses():
+    response = requests.get(BASE_URL)
+    if response.status_code == 200:
+        expenses = response.json().get('expenses', [])
+        for expense in expenses:
+            print(f"ID: {expense['id']}, Description: {expense['description']}, Amount: {expense['amount']}, Date: {expense['date']}")
+    
+    else:
+        print("Error retrieving expenses: ", response.status_code)
 
 
 def add_expense(description, amount, date):    #Add Expense function which defines the add expense dictionary key-pairs.
@@ -19,11 +28,7 @@ def add_expense(description, amount, date):    #Add Expense function which defin
     else:
         print("Error adding your response.", response.status_code)
 
-
-def view_expenses():
-    response = requests.get(BASE_URL)
-    if 
-
+def 
 
 
 
